@@ -1,4 +1,3 @@
-poweroff
 ls -la
 ls -lai
 cat /proc/filesystems 
@@ -119,3 +118,157 @@ cat /proc/partitions
 history
 history | cut -c 8-
 history | cut -c 8- > git/lfs301_Jun/day2-history.txt 
+cd git/lfs301_Jun/
+git add .
+git commit -m "Day2 history file"
+git push
+reboot
+cat /proc/partitions 
+df -h
+df -hT
+blkid
+lsblk
+fdisk -l /dev/nvme0n2 
+lsblk -fp
+fdisk /dev/nvme0n2 
+lsblk -fp
+gdisk /dev/nvme0n2
+lsblk -fp
+gdisk /dev/nvme0n2
+lsblk -fp
+mkfs --help
+mkfs.ext4 /dev/nvme0n2p1
+lsblk -fp
+mkdir /mbrPart
+mount /dev/nvme0n2p1 /mbrPart
+df -hT
+vi /etc/fstab 
+umount /mbrPart
+df -h
+mount -a
+df -h
+lsblk -fp
+e2label /dev/nvme0n2p1
+e2label /dev/nvme0n2p1 MbrPart
+e2label /dev/nvme0n2p1
+lsblk -fp
+vi /etc/fstab 
+umount /mbrPart 
+df -h
+mount -a
+df -h
+cd /mbrPart/
+touch plik1
+ls -la
+cd ..
+cd
+mount -o remount,ro /mbrPart
+cd /mbrPart
+cat plik1 
+touch plik2
+mount -o remount,rw /mbrPart
+touch plik2
+cd
+cat /proc/mounts 
+clear
+gdisk /dev/nvme02
+gdisk /dev/nvme0n2
+lsblk -fp
+pvcreate /dev/nvme0n2p2
+pvs
+pvdisplay 
+pvdisplay "/dev/nvme0n2p2"
+vgcreate /dev/nvme0n2p2 vg1
+vgcreate vg1 /dev/nvme0n2p2 
+vgs
+vgdisplay 
+vgchange --help
+vgchange -s 1M vg1
+vgdisplay 
+vgs
+lvcreate --help
+lvcreate -L 500M -n lv1 /dev/vg1
+lvs
+lvdisplay 
+df -h
+cd /dev/mapper/
+ls -la
+cat /proc/partitions 
+cd /dev
+ls -la *vg*
+lvs
+mkfs.xfs /dev/vg1/lv1 
+df -h
+mkdir /gptPart
+mount /dev/mapper/vg1-lv1 /gptPart
+df -hT
+lsblk -fp
+cd /gptPart/
+ls -la
+dd if=/dev/urandom of=bigFile bs=1M count=400
+df -h
+dd if=/dev/urandom of=bigFile bs=1M count=420
+df -h
+lvs
+vgs
+lvextend -L +520M /dev/mapper/vg1-lv1 
+lvs
+vgs
+df -h
+df -hT
+xfs_growfs /dev/mapper/vg1-lv1
+df -h
+dd if=/dev/urandom of=bigFile2 bs=1M count=510
+df -h
+vgs
+cat /proc/partitions 
+pvcreate /dev/sda
+pvs
+vgs
+vgextend --help
+vgextend vg1 /dev/sda
+vgs
+lvextend -L + 1G /dev/mapper/vg1-lv1
+lvextend -L +1G /dev/mapper/vg1-lv1
+lvs
+xfs_growfs /dev/mapper/vg1-lv1
+df -hT
+ls -la
+cd
+xfsdump --help
+xfsdump -f xfsDump.dump /gptPart
+ls -lah
+umount /gptPart 
+lvs
+lvreduce -L 1.5G /dev/vg1/lv1
+lvs
+mkfs.xfs /dev/vg1/lv1
+mkfs.xfs /dev/vg1/lv1 -f
+mount /dev/vg1/lv1 /gptPart/
+xfsrestore -f xfsDump.dump  /gptPart
+cd /gptPart
+ls -la
+wipefs --help
+lvcreate --help
+df -h
+dump2fs /dev/nvme0n2p1
+dumpe2fs /dev/nvme0n2p1
+e4defrag --help
+e4defrag -c /var/log
+e4defrag -c /mbrPart/ 
+e4defrag -c /mbrPart/
+e4defrag -c /mbrPart
+clear
+cd
+xfs_info /gptPart/
+xfs_db --help
+man xfs_db
+xfs_db -r /dev/vg1/lv1
+xfs_db -r /dev/mapper/rhel_vg0-root 
+man xfs_fsr 
+xfs_fsr /dev/mapper/vg1-lv1 -t 60 -f defragDetails.txt
+vi defragDetails.txt
+cd git/lfs301_Jun/
+ls -la
+history
+history | cut -c 8- >day2-history.txt 
