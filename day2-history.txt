@@ -1,0 +1,121 @@
+poweroff
+ls -la
+ls -lai
+cat /proc/filesystems 
+cat /proc/filesystems  | grep -v "nodev"
+df -hT
+cd /proc
+ls -la
+touch plik
+cd
+vi plik1
+ln -s plik1 softlink
+ls -la
+ls -lai 
+rm plik1
+ls -lai 
+vi softlink 
+ls -lai 
+vi plik2
+ln plik2 hardlink
+ls -lai 
+rm plik2 -f
+ls -lai 
+vi hardlink 
+ln hardlink hardlink2
+vi hardlink
+vi hardlink2
+vi hardlink
+find . -inum 34036927\
+find . -inum 34036927
+ls -lai hardlink*
+chmod 777 hardlink
+ls -lai hardlink*
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+dnf install git
+vi /etc/yum.repos.d/
+vi /etc/yum.repos.d/redhat.repo 
+mount /dev/cdrom /mnt/
+cp /mnt/media.repo /etc/yum.repos.d/
+dnf repolist
+dnf repolist al
+dnf repolist all
+dnf install git
+vi /etc/yum.repos.d/media.repo 
+ls -la /etc/yum.repos.d/media.repo
+chmod 644 /etc/yum.repos.d/media.repo
+vi /etc/yum.repos.d/media.repo
+dnf repolist all
+cd /mnt
+ls -la
+cd BaseOS/
+ls -la
+q
+vi /etc/yum.repos.d/media.repo 
+dnf clean all
+dnf repolist
+dnf install git
+git config --global user.email 'markuj5@gmail.com'
+git config --global user.name "Marcin"
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+cd
+mkdir git
+cd git
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+ls
+systemd-analyze 
+systemd-analyze blame
+systemctl status syslog.service 
+journalctl 
+journalctl -p err
+journalctl --help
+journalctl -u chrony
+journalctl -u chronyd
+journalctl -b
+journalctl -f
+cd /run/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+ls -la
+less system.journal
+cd ..
+touch plik
+ls -la
+cd
+cd /var/log
+ls -la
+mkdir journal
+systemctl restart systemd-journald
+ls -la journal/
+cd /run/log/
+ls -la
+cd /var/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+ls -la
+cd
+vi /etc/systemd/journald.conf 
+systemctl restart systemd-journald
+journalctl -f 
+journalctl -u sshd
+tail -20 /var/log/messages 
+tail -20 /var/log/secure 
+cd /var/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+less system.journal 
+cd 
+cat /proc/partitions 
+ip a s
+echo "- - -" > /sys/class/scsi_host/host0/scan 
+cat /proc/partitions 
+echo "- - -" > /sys/class/scsi_host/host1/scan 
+cat /proc/partitions 
+for i in `seq 0 31`; do echo $i; done
+for i in `seq 0 31`; do echo "- - -" > /sys/class/scsi_host/host$i/scan; done
+cat /proc/partitions 
+partprobe 
+cat /proc/partitions 
+history
+history | cut -c 8-
+history | cut -c 8- > git/lfs301_Jun/day2-history.txt 
