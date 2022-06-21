@@ -664,19 +664,61 @@ xfs_db -r /dev/mapper/rhel_vg0-root
 man xfs_fsr 
 xfs_fsr /dev/mapper/vg1-lv1 -t 60 -f defragDetails.txt
 vi defragDetails.txt
-cd git/lfs301_Jun/
+cat /proc/partitions
+mdadm -E /dev/sda[1-4]
+wipefs -a /dev/sda4
+wipefs --force /dev/sda4
+mdadm -E /dev/sda[1-4]
+wipefs
+wipefs -a /dev/sda4 --force
+mdadm -E /dev/sda[1-4]
+mdadm --help
+mdadm --create /dev/md5 --level=5 --raid-devices=3 /dev/sda[1-3]
+mdadm -D /dev/md5
+mkfs.ext4 /dev/md5
+mkdir /raid5
+mount /dev/md5 /raid5
 ls -la
-history
-history | cut -c 8- >day2-history.txt 
-vi day2-history.txt
-git add .
-git commit -m "Add day2 file"
-git push
-git config --global credential.helper store
-git push
-history
-cd git/lfs301_Jun/
-vi day2-history.txt 
-cat day2-history.txt |grep -i e4defrag
-vi day2-history.txt 
-history | cut -c 8- >> day2-history.txt 
+cd /raid5/
+ls -la
+dd if=/dev/urandom of=raidFile1 bs=1M count=25
+dd if=/dev/urandom of=raidFile2 bs=1M count=25
+dd if=/dev/urandom of=raidFile3 bs=1M count=45
+ls -la
+ls -lah
+mdadm -D /dev/md5
+cat /proc/mdstat
+cd
+mdadm --manage --add /dev/md5 /dev/sda4
+cat /proc/mdstat
+mdadm -D /dev/md5
+mdadm --manage --fail /dev/md5 /dev/sda2
+mdadm -D /dev/md5
+mdadm --manage --fail /dev/md5 /dev/sda1
+mdadm -D /dev/md5
+mdadm --manage --help
+mdadm --manage --re-add /dev/md5 /dev/sda1
+mdadm -D /dev/md5
+mdadm --manage --re-add /dev/md5 /dev/sda2
+mdadm -D /dev/md5
+mdadm --remove /dev/md5 /dev/sda2
+mdadm -D /dev/md5
+mdadm --manage --add /dev/md5 /dev/sda2
+mdadm -D /dev/md5
+mdadm stop /dev/md5
+mdadm --stop /dev/md5
+df -h
+umount /raid5
+mdadm --stop /dev/md5
+mdadm -D /dev/md5
+mdadm --start /dev/md5
+mdadm --help
+cat /proc/mdstat
+mdadm --detail /dev/md5
+mdadm --run /dev/md5
+mdadm --create /de/vmd5 --level=5 --raid-devices=3 /dev/sda[1-3]
+mdadm --create /dev/md5 --level=5 --raid-devices=3 /dev/sda[1-3]
+mdadm --detail /dev/md5
+mdadm --detail --scan --verbose
+mdadm --detail --scan --verbose > /etc/mdadm.conf
+
