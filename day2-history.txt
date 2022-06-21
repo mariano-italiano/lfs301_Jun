@@ -1,3 +1,4 @@
+poweroff
 ls -la
 ls -lai
 cat /proc/filesystems 
@@ -122,6 +123,401 @@ cd git/lfs301_Jun/
 git add .
 git commit -m "Day2 history file"
 git push
+reboot
+getenforce
+getsebool -a | grep -i nfs
+dnf install nfs-utils
+df -h
+mkdir /NFS
+mount 192.168.1.81:/nfs-share  /NFS/
+df -h
+cd /NFS
+ls -la
+touch rhel8File
+cd
+vi /etc/fstab 
+df -h
+lsblk -pf
+vgs
+lvcreate -L 1G -n swap vg1
+lvs
+mkswap /dev/mapper/vg1-swap 
+swapon -s
+swapon /dev/mapper/vg1-swap
+swapon -s
+cat /proc/swaps
+swapoff /dev/mapper/vg1-swap
+cat /proc/swaps
+swapon -a
+swapon -s
+swapoff /dev/mapper/rhel_vg0-swap
+swapon /dev/mapper/vg1-swap
+ls -la
+swapon -s
+swapon -a
+swapon -s
+lsblk -pf
+e2label /dev/mapper/rhel_vg0-swap
+df -h
+cd /gptPart
+ls -la
+mv bigFile2 swapfile
+mkswap swapfile 
+swapon swapfile
+swapon -s
+cd
+df -i
+df -hTi
+df -hT
+df -T
+cd /var/log
+du -sh *
+cd /var
+du -sh *
+cd cache/
+du -sh *
+du --
+du -hx * --max
+du -sh * -d 1
+du -sh * -d=1
+du -sh --max-depth=1 *
+du --max-depth=1 -hx *
+ls -la
+du --max-depth=1 -hx /
+df -h
+cd
+cat /proc/partitions 
+vgs
+grep -i config_dm_crypt /boot/config-4.18.0-372.9.1.el8.x86_64 
+lsmod | grep -i crypt
+lsmod | grep -i dm_crypt
+modprobe dm_crypt
+lsmod | grep -i dm_crypt
+lvcreate -L 400M -n luks vg1
+lvs
+cryptsetup -y luksFormat /dev/mapper/vg1-luks 
+cryptsetup luksOpen /dev/mapper/vg1-luks myLuks
+mkfs.ext4 /dev/mapper/myLuks 
+mkdir /secretData
+mount /dev/mapper/myLuks /secretData/
+cd /secretData/
+ls -la
+touch fajnyPlik
+touch fajnyPlik2
+cd
+umount /secretData 
+cryptsetup luksClose myLuks 
+df -h
+cryptsetup luksOpen /dev/mapper/vg1-luks test
+cat /proc/partitions 
+mount /dev/mapper/test /secretData/
+ls -la
+ls -la /secretData/
+df -h
+umount /secretData 
+cryptsetup luksClose test
+cat /proc/crypto 
+cat /proc/crypto | grep -i name
+cat /proc/crypto | grep -i name | sort -u
+ls -la /etc/crypttab 
+vi /etc/fstab 
+lsblk -pf
+lsblk
+lvremove /dev/mapper/vg1-swap 
+swapoff /dev/mapper/vg1-swap
+lvremove /dev/mapper/vg1-swap 
+lvremove /dev/mapper/vg1-luks 
+lvremove /dev/mapper/vg1-lv1 
+df -h
+umount /gptPart
+cd
+lvs
+umount /gptPart 
+lsof /gptPart
+vgs
+umount /NFS 
+umount /mbrPart 
+umount /gptPart 
+umount /gptPart -l
+umount --help
+df -h
+lvremove /dev/mapper/vg1-lv1 
+dmsetup info -c | grep lv1
+lsof | grep "major,minor"
+lsof | grep "253,2"
+modprobe -r dm_crypt 
+lvremove /dev/mapper/vg1-lv1 
+lsof
+lsof | grep -i lv1
+lsof | grep "253,2"
+dmsetup info -c | grep lv1
+lsof | grep -i lvm
+cd git/
+cd ls
+cd lfs301_Jun/
+vi day2-history.txt 
+history
+history | cut -c 8- >day2-history.txt
+poweroff
+ls -la
+ls -lai
+cat /proc/filesystems 
+cat /proc/filesystems  | grep -v "nodev"
+df -hT
+cd /proc
+ls -la
+touch plik
+cd
+vi plik1
+ln -s plik1 softlink
+ls -la
+ls -lai 
+rm plik1
+ls -lai 
+vi softlink 
+ls -lai 
+vi plik2
+ln plik2 hardlink
+ls -lai 
+rm plik2 -f
+ls -lai 
+vi hardlink 
+ln hardlink hardlink2
+vi hardlink
+vi hardlink2
+vi hardlink
+find . -inum 34036927\
+find . -inum 34036927
+ls -lai hardlink*
+chmod 777 hardlink
+ls -lai hardlink*
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+dnf install git
+vi /etc/yum.repos.d/
+vi /etc/yum.repos.d/redhat.repo 
+mount /dev/cdrom /mnt/
+cp /mnt/media.repo /etc/yum.repos.d/
+dnf repolist
+dnf repolist al
+dnf repolist all
+dnf install git
+vi /etc/yum.repos.d/media.repo 
+ls -la /etc/yum.repos.d/media.repo
+chmod 644 /etc/yum.repos.d/media.repo
+vi /etc/yum.repos.d/media.repo
+dnf repolist all
+cd /mnt
+ls -la
+cd BaseOS/
+ls -la
+q
+vi /etc/yum.repos.d/media.repo 
+dnf clean all
+dnf repolist
+dnf install git
+git config --global user.email 'markuj5@gmail.com'
+git config --global user.name "Marcin"
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+cd
+mkdir git
+cd git
+git clone https://github.com/mariano-italiano/lfs301_Jun.git
+ls
+systemd-analyze 
+systemd-analyze blame
+systemctl status syslog.service 
+journalctl 
+journalctl -p err
+journalctl --help
+journalctl -u chrony
+journalctl -u chronyd
+journalctl -b
+journalctl -f
+cd /run/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+ls -la
+less system.journal
+cd ..
+touch plik
+ls -la
+cd
+cd /var/log
+ls -la
+mkdir journal
+systemctl restart systemd-journald
+ls -la journal/
+cd /run/log/
+ls -la
+cd /var/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+ls -la
+cd
+vi /etc/systemd/journald.conf 
+systemctl restart systemd-journald
+journalctl -f 
+journalctl -u sshd
+tail -20 /var/log/messages 
+tail -20 /var/log/secure 
+cd /var/log/journal/
+ls -la
+cd f77c16f2bb95420695a7166792ef3900/
+less system.journal 
+cd 
+cat /proc/partitions 
+ip a s
+echo "- - -" > /sys/class/scsi_host/host0/scan 
+cat /proc/partitions 
+echo "- - -" > /sys/class/scsi_host/host1/scan 
+cat /proc/partitions 
+for i in `seq 0 31`; do echo $i; done
+for i in `seq 0 31`; do echo "- - -" > /sys/class/scsi_host/host$i/scan; done
+cat /proc/partitions 
+partprobe 
+cat /proc/partitions 
+history
+history | cut -c 8-
+history | cut -c 8- > git/lfs301_Jun/day2-history.txt 
+cd git/lfs301_Jun/
+git add .
+git commit -m "Day2 history file"
+git push
+reboot
+getenforce
+getsebool -a | grep -i nfs
+dnf install nfs-utils
+df -h
+mkdir /NFS
+mount 192.168.1.81:/nfs-share  /NFS/
+df -h
+cd /NFS
+ls -la
+touch rhel8File
+cd
+vi /etc/fstab 
+df -h
+lsblk -pf
+vgs
+lvcreate -L 1G -n swap vg1
+lvs
+mkswap /dev/mapper/vg1-swap 
+swapon -s
+swapon /dev/mapper/vg1-swap
+swapon -s
+cat /proc/swaps
+swapoff /dev/mapper/vg1-swap
+cat /proc/swaps
+swapon -a
+swapon -s
+swapoff /dev/mapper/rhel_vg0-swap
+swapon /dev/mapper/vg1-swap
+ls -la
+swapon -s
+swapon -a
+swapon -s
+lsblk -pf
+e2label /dev/mapper/rhel_vg0-swap
+df -h
+cd /gptPart
+ls -la
+mv bigFile2 swapfile
+mkswap swapfile 
+swapon swapfile
+swapon -s
+cd
+df -i
+df -hTi
+df -hT
+df -T
+cd /var/log
+du -sh *
+cd /var
+du -sh *
+cd cache/
+du -sh *
+du --
+du -hx * --max
+du -sh * -d 1
+du -sh * -d=1
+du -sh --max-depth=1 *
+du --max-depth=1 -hx *
+ls -la
+du --max-depth=1 -hx /
+df -h
+cd
+cat /proc/partitions 
+vgs
+grep -i config_dm_crypt /boot/config-4.18.0-372.9.1.el8.x86_64 
+lsmod | grep -i crypt
+lsmod | grep -i dm_crypt
+modprobe dm_crypt
+lsmod | grep -i dm_crypt
+lvcreate -L 400M -n luks vg1
+lvs
+cryptsetup -y luksFormat /dev/mapper/vg1-luks 
+cryptsetup luksOpen /dev/mapper/vg1-luks myLuks
+mkfs.ext4 /dev/mapper/myLuks 
+mkdir /secretData
+mount /dev/mapper/myLuks /secretData/
+cd /secretData/
+ls -la
+touch fajnyPlik
+touch fajnyPlik2
+cd
+umount /secretData 
+cryptsetup luksClose myLuks 
+df -h
+cryptsetup luksOpen /dev/mapper/vg1-luks test
+cat /proc/partitions 
+mount /dev/mapper/test /secretData/
+ls -la
+ls -la /secretData/
+df -h
+umount /secretData 
+cryptsetup luksClose test
+cat /proc/crypto 
+cat /proc/crypto | grep -i name
+cat /proc/crypto | grep -i name | sort -u
+ls -la /etc/crypttab 
+vi /etc/fstab 
+lsblk -pf
+lsblk
+lvremove /dev/mapper/vg1-swap 
+swapoff /dev/mapper/vg1-swap
+lvremove /dev/mapper/vg1-swap 
+lvremove /dev/mapper/vg1-luks 
+lvremove /dev/mapper/vg1-lv1 
+df -h
+umount /gptPart
+cd
+lvs
+umount /gptPart 
+lsof /gptPart
+vgs
+umount /NFS 
+umount /mbrPart 
+umount /gptPart 
+umount /gptPart -l
+umount --help
+df -h
+lvremove /dev/mapper/vg1-lv1 
+dmsetup info -c | grep lv1
+lsof | grep "major,minor"
+lsof | grep "253,2"
+modprobe -r dm_crypt 
+lvremove /dev/mapper/vg1-lv1 
+lsof
+lsof | grep -i lv1
+lsof | grep "253,2"
+dmsetup info -c | grep lv1
+lsof | grep -i lvm
+cd git/
+cd ls
+cd lfs301_Jun/
+vi day2-history.txt 
+history
+history | cut -c 8- >day2-history.txt
 reboot
 cat /proc/partitions 
 df -h
@@ -272,3 +668,15 @@ cd git/lfs301_Jun/
 ls -la
 history
 history | cut -c 8- >day2-history.txt 
+vi day2-history.txt
+git add .
+git commit -m "Add day2 file"
+git push
+git config --global credential.helper store
+git push
+history
+cd git/lfs301_Jun/
+vi day2-history.txt 
+cat day2-history.txt |grep -i e4defrag
+vi day2-history.txt 
+history | cut -c 8- >> day2-history.txt 
