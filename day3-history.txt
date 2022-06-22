@@ -1,0 +1,261 @@
+journalctl -b
+cd /boot
+ls -la
+uname -a
+ls -lah
+df -h
+vi grub2/grub.cfg 
+vi /etc/default/grub
+vi grub2/grub.cfg 
+cd /etc/grub.d/
+ls -la
+cd 
+sysctl 
+sysctl -a | wc -l
+sysctl -a 
+cd /proc/sys
+ls -la
+cd vm
+ls -la swappiness
+cat swappiness
+echo "50" > /proc/sys/vm/swappiness
+sysctl -a | grep swappiness
+vi /etc/sysctl.conf 
+vi /etc/sysctl.d/99-sysctl.conf 
+vi /etc/sysctl.d/swap.conf
+vi /etc/sysctl.conf 
+sysctl -p
+sysctl -a | grep swappiness
+systcl
+sysctl
+cd
+sysctl -a | grep hugepages
+sysctl -a | grep ip_forward
+sysctl -a | grep icmp_echo
+ip a
+vi /etc/sysctl.
+vi /etc/sysctl.conf 
+sysctl -p
+vi /etc/sysctl.conf 
+sysctl -p
+sysctl -a | grep icmp_ech
+echo "0" > /proc/sys/net/ipv4/icmp_echo_ignore_all 
+sysctl -a | grep icmp_ech
+sysctl -a | grep ttl
+sysctl -a | grep pid
+sysctl -a | grep thread
+sysctl -a | grep inode
+man sysctl
+sysctl.conf(5)
+man sysctl.conf(5)
+man sysctl.conf
+lsmod
+modinfo xfs
+modinfo e1000
+modinfo vmxnet3
+cd /lib/modules/4.18.0-372.9.1.el8.x86_64
+find . -type f -name "*.ko*"
+find . -type f -name "*.ko*" | grep -i ext4
+lsmod | grep -i ext4
+modprobe ext4
+lsmod | grep -i ext4
+modprobe -r ext4
+modprobe --help
+lsmod | grep -i ext4
+insmod ext4
+insmod kernel/fs/ext4/ext4.ko.xz
+xz --help
+xz -d kernel/fs/ext4/ext4.ko.xz 
+ls -la kernel/fs/ext4/
+insmod kernel/fs/ext4/ext4.ko
+lsmod | grep -i ext4
+less kernel/fs/ext4/ext4.ko
+xz kernel/fs/ext4/ext4.ko
+ls -la kernel/fs/ext4/
+modprobe ext4
+less kernel/fs/ext4/ext4.ko
+lsmod | grep -i ext4
+modprobe -r ext4
+modinfo crc32c_intel
+lsmod | grep -i ext4
+cd /etc/modprobe.d/
+ls -la
+vi kvm.conf
+vi vhost.conf
+vi tuned.conf 
+vi luks.conf
+lsmod | grep -i dm_crypt
+clear
+cd
+id student
+cat /etc/passwd
+id marcin
+cat /etc/shadow
+vi /etc/default/useradd 
+vi /etc/pam.d/passwd
+vi /etc/login.defs 
+cat /etc/shadow
+useradd --help
+useradd jan
+cat /etc/passwd
+vi /etc/default/useradd 
+useradd -c "Tomasz Kowalski - Team Development" -s /bin/sh -g wheel -G jan -d /var/tomasz tomasz
+cat /etc/passwd
+id jan
+id tomasz
+useradd -u 1020 -c "Dorota Kowalska - Application Team" dorota
+cat /etc/passwd
+useradd test
+cat /etc/passwd
+passwd jan
+passwd tomasz
+passwd dorota
+ls -al /home
+userdel --help
+userdel -r test
+ls -al /home
+ip a
+passwd -l dorota
+passwd -u dorota
+id dorota
+id jan
+id tomasz
+usermod -G dorota tomasz
+id tomasz
+usermod -aG jan tomasz
+id tomasz
+usermod --help
+groupadd development
+cat /etc/group
+groupadd application -g 1030
+groupmod -g 1022 application 
+cat /etc/group
+cat /etc/passwd
+cat /etc/shadow
+chage --help
+chage -l jan
+chage -I 10 jan
+chage -E "2022-06-30" jan
+lastlog
+chage -W 14 jan
+chage -l jan
+cat /etc/shadow | grep jan
+chage -m 0 -M 99999 -I -1 -E -1 jan
+chage -m 0 -M 99999 -I -1 -E -1 -W 7 jan
+cat /etc/shadow | grep jan
+chage -d 0 dorota
+chage -l dorota
+cat /etc/shadow|grep dorota
+vi /etc/hosts
+ip a s
+ssh-keygen --help
+ssh-keygen -t rsa
+cd .ssh/
+ls -la
+cd
+ssh-copy-id -i .ssh/id_rsa.pub  root@centos7
+ssh 'root@centos7'
+ls -la
+scp plik1 root@centos7:/root/
+scp hard*  root@centos7:/root/
+scp rot@centos7:/root/testFile.txt .
+scp root@centos7:/root/testFile.txt .
+ls -la
+dnf install pssh
+su - marcin
+vi /etc/sudoers
+visudo
+whoami
+su - marcin
+visudo
+id dorota
+visudo
+id jan
+id tomasz
+usermod -aG development jan
+id jan
+visudo
+su - dorota
+passwd dorota
+visudo
+vi /etc/sudoers.d/
+vi /etc/sudoers.d/development
+which systemctl 
+visudo
+vi /etc/sudoers.d/development
+cd
+clear
+ls -la
+touch test123
+ls -la test123
+umask
+umask 0035
+touch plik111
+ls -la plik111
+mkdir folder1
+ls -la folder1
+vi /etc/login.defs 
+umask 0022
+cat /etc/group
+id tomasz
+id jan
+groupadd tomasz -g 1002
+usermod -g 1002 -G application
+usermod -g 1002 -G application tomasz
+id tomasz
+id jan
+mkdir projektA
+cd projektA/
+mkdir app
+mkdir dev
+cd ..
+ls -la plik123
+ls -la plik1
+chmod 700 plik1
+ls -la
+ls -la plik1
+chmod u-w,g+r,o+x plik1
+ls -la plik1
+chmod 644 plik1
+ls -la plik1
+mkdir /tmp/dev
+mkdir /tmp/app
+cd /tmp
+ls -la
+id jan
+chown jan dev
+chown jan dev -R
+chown tomasz:application app -R
+ls -la
+chgrp application dev
+ls -la dev
+chown :development dev
+ls -la dev
+ls -la dev app
+chmod 775 app/
+chmod 775 dev
+id dorota
+usermod -aG development dorota
+id dorota
+touch app/plik1
+chown tomasz:application app/plik1
+chown tomasz:tomasz app/plik1
+su - tomasz
+su - jan
+chmod -R 2775 dev/
+chmod -R 2775 app/
+su - jan
+cd
+cd git/lfs301_Jun/
+history
+echo $HISTSIZE
+cd
+vi .bash_profile 
+vi .bash_rc
+vi .bashrc 
+vi .profile
+vi .bash_history 
+vi .bashrc 
+vi .bash_profile 
+history
+history | awk '$1 > 521' | cut -c 8- > git/lfs301_Jun/day3-history.txt 
