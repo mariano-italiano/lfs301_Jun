@@ -257,5 +257,157 @@ vi .profile
 vi .bash_history 
 vi .bashrc 
 vi .bash_profile 
+
+vi .bash_history 
+vi .bash_profile 
+echo $HISTSIZE
+hostnamectl status
+hostname
+hostname -f
+hostnamectl set-hostname rhel
+su - jan
+hostnamectl set-hostname rhel8-server
+ip addr show
+ifconfig
+ip 
+ip addr add 172.16.1.10/24 dev ens160 
+ip a s
+ifconfig 
+ip a s
+ip link show
+ip link set ens160 down
+ip a s
+ip link set ens160 up
+ip a s
+ip addr add 172.16.1.10/24 dev ens160 
+route -n
+ip route show
+ip route add 172.16.1.0/24 via 192.168.1.222
+ip route add 172.16.1.0/24 via 192.168.2.1
+ip route add 172.16.1.0/24 via 172.16.1.1
+ip route add 172.32.1.0/24 via 192.168.1.250
+ip route add 172.32.1.0/24 via 172.32.1.1
+route -n
+ip route del 172.32.1.0
+ip route del 172.32.1.0/24
+route -n
+ip link set ens160 down; ip link set ens160 up
+ip a s
+vi /etc/sysconfig/network-scripts/ifcfg-ens160 
+vi /etc/resolv.conf 
+ip link set ens160 down; ip link set ens160 up
+vi /etc/resolv.conf 
+nmcli connection down ens160 ; nmcli connection up ens160 
+vi /etc/resolv.conf 
+nmcli 
+nmcli connection edit ens160 
+nmcli connection show
+nmcli device status
+nmcli device show
+nmcli device show ens160 
+nmcli connection add con-name DMZ ifname ens160 type ethernet ip4 10.0.0.10/24 gw4 10.0.0.1
+nmcli connection show
+nmcli device status
+nmcli connection up DMZ 
+ip a s
+nmcli connection show
+nmcli device status
+nmcli device show
+nmcli connection modify ens160 ipv4.dns 8.8.8.8
+nmcli connection modify ens160 ipv4.method manual 
+nmcli device show ens160 
+nmcli connection down DMZ ; nmcli connection up DMZ 
+nmcli device show ens160 
+nmcli connection modify DMZ ipv4.method manual 
+nmcli connection modify DMZ ipv4.dns 8.8.8.8
+nmcli device show ens160 
+nmcli device show
+nmcli connection show DMZ 
+nmcli connection show ens160 
+nmcli connection modify ens160 ipv4.dns 192.168.1.1
+ip a s
+nmcli c s
+nmcli connection up ens160 
+nmcli c s
+ip a s
+nmcli connection add con-name Internet type bridge ifname virbr0 
+nmcli c s
+nmcli connection edit Internet 
+nmcli c s Internet 
+history 
+vi .nmcli-history 
+nmtui-edit 
+nmcli connection show 
+nmcli connection show ens160 
+nmtui-edit
+setfacl -m u:tomasz:w dev/ 
+ls -la dev
+getfacl dev
+setfacl -m u:tomasz:rwx dev/ 
+ls -la
+cd dev
+ls -la/
+ls -la
+setfacl -x u:tomasz .
+getfacl /tmp
+getfacl /tmp/dev/
+setfacl -m g:application:rwx /tmp/dev
+getfacl /tmp/dev/
+ls -la
+clear
+cd
+vi git/lfs301_Jun/day3-history.txt 
 history
-history | awk '$1 > 521' | cut -c 8- > git/lfs301_Jun/day3-history.txt 
+vi /etc/nsswitch.conf
+systemctl status nscd
+nslookup centos7
+systemctl status dnsmasq.service
+firewall-cmd
+systemctl status firewalld.service
+firewall-cmd --list-all
+firewall-cmd --state
+firewall-cmd --get-default-zone
+firewall-cmd --get-zones
+firewall-cmd --zone=dmz --list-all
+firewall-cmd --zone=home --list-all
+firewall-cmd --zone=home --add-service=ftp
+firewall-cmd --zone=home --add-service=ftp --permanent
+firewall-cmd --zone=home --add-service=https --permanent
+firewall-cmd --zone=home --add-port=8080 --permanent
+firewall-cmd --zone=home --add-port=8080/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone=home --list-all
+firewall-cmd --new-zone servers
+firewall-cmd --new-zone servers --permanent
+firewall-cmd --zone servers --list-all
+firewall-cmd --zoneservers --list-all
+firewall-cmd --zone-servers --list-all
+firewall-cmd --reload
+firewall-cmd --zone servers --list-all
+firewall-cmd --zone servers --add-service=ssh
+firewall-cmd --zone servers --add-service=dns
+firewall-cmd --zone servers --add-service=nfs
+firewall-cmd --zone servers --add-port=443/tcp
+firewall-cmd --zone servers --add-service=ssh --permanent
+firewall-cmd --zone servers --add-service=dns --permanent
+firewall-cmd --zone servers --add-service=nfs --permanent
+firewall-cmd --zone servers --add-port=443/tcp --add-service=nfs
+firewall-cmd --zone servers --add-port=443/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone servers --list-all
+firewall-cmd --change-interface=ens160 --zone servers --permanent
+firewall-cmd --get-active-zones
+firewall-cmd --get-active-zones --list-all
+firewall-cmd --get-default-zones --list-all
+firewall-cmd --get-default-zone --list-all
+firewall-cmd --get-default-zone
+firewall-cmd --set-default-zone=servers
+firewall-cmd --get-default-zone
+firewall-cmd --list-all
+firewall-cmd --get-services
+firewall-cmd --zone servers --remove-service=nfs --permanent
+firewall-cmd --reload
+firewall-cmd --list-all
+systemctl disable --now firewalld.service
+systemctl status firewall-cmd
+history | awk '$1 > 795' | cut -c 8- >> git/lfs301_Jun/day3-history.txt
