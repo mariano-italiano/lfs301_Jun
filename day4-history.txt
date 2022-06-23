@@ -64,3 +64,395 @@ ls -la
 tar czfv photoTar.tar.gz photo1.jpeg
 ls -la
 gzip photo1.jpeg
+systemctl isolate multi-user.target
+systemctl isolate runlevel6.target
+reboot
+getenforce
+vi /etc/selinux/config
+reboot
+getenforce
+reboot
+passwd
+wget https://training.linuxfoundation.org/cm/LFS301/LFS301_V8.0_SOLUTIONS.tar.xz
+wget --user=LFtraining --password=Penguin2014 https://training.linuxfoundation.org/cm/LFS301/LFS301_V8.0_SOLUTIONS.tar.xz
+tar xzvf LFS301_V8.0_SOLUTIONS.tar.xz
+tar -xzvf LFS301_V8.0_SOLUTIONS.tar.xz
+tar xjvf LFS301_V8.0_SOLUTIONS.tar.xz
+tar xJvf LFS301_V8.0_SOLUTIONS.tar.xz
+wget --user=LFtraining --password=Penguin2014 https://training.linuxfoundation.org/cm/LFS301/LFS301_V8.0_RESOURCES.tar.xz
+wget --user=LFtraining --password=Penguin2014 https://training.linuxfoundation.org/cm/LFS301/LFS301_V8.0_RESOURCES.tar
+wget https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+cd /kvm/
+ls -la
+cd
+ls
+mv bionic-server-cloudimg-amd64.img /kvm/
+cd /kvm
+ls -la
+virt-install  --virt-type=kvm --name bionicVm --ram 1024 --vcpus=2 --cdrom=/kvm/bionic-server-cloudimg-amd64.img --network=bridge=virbr0,model=virtio --graphics vnc --disk path=/kvm/bionic.qcow2,size=10,bus=virtio,format=qcow2
+virsh list
+virsh destroy bionicVm
+getef
+geten
+getenforce
+clear
+ls -la /lib/modules/3.10.0-1160.59.1.el7.x86_64/kernel/arch/x86/kvm/
+lscpu | grep -i virtualization
+find /var/lob/modules/3.10.0-1160.59.1.el7.x86_64/ -type f "*kvm*"
+find /var/lob/modules/3.10.0-1160.59.1.el7.x86_64/ -type f -name "*kvm*"
+find /var/lib/modules/3.10.0-1160.59.1.el7.x86_64/ -type f -name "*kvm*"
+find /lib/modules/3.10.0-1160.59.1.el7.x86_64/ -type f -name "*kvm*"
+cat /proc/cpuinfo | grep vmx
+cat /proc/cpuinfo | grep svm
+cd /boot
+ls -la
+cat config-3.10.0-1160.59.1.el7.x86_64 | grep -i kvm
+lsmod | grep -i kvm
+cd
+yum install qemu-kvm qemu-img virt-manager libvirt libvirt-python libguestfs-tools libvirt-client virt-install virt-viewer bridge-utils libvirt-daemon-kvm qemu-system-x86 -y
+ls /lib/modules/3.10.0-1160.59.1.el7.x86_64/kernel/arch/kvm
+ls /lib/modules/3.10.0-1160.59.1.el7.x86_64/kernel/arch/
+ls /lib/modules/3.10.0-1160.59.1.el7.x86_64/kernel/arch/x86/
+ls /lib/modules/3.10.0-1160.59.1.el7.x86_64/kernel/arch/x86/kvm/
+df -h
+cat /proc/partitions
+partprobe
+cat /proc/partitions
+udevadm settle
+cat /proc/partitions
+echo "- - -" > /sys/class/scsi_host/host0/scan
+cat /proc/partitions
+pvcreate /dev/sdb
+vgcreate /dev/sdb vg_kvm
+vgcreate vg_kvm /dev/sdb
+lvcreate -l 100%FREE -n lv_kvm /dev/vg_kvm
+vgs
+lvs
+mkdir /kvm
+mkfs.ext4 /dev/vg_kvm/lv_kvm
+mount /dev/vg_kvm/lv_kvm /kvm/
+df -h
+qemu-img --help
+qemu-img -o preallocation=full -f qcow2 /kvm/ubuntu20.qcow 16G
+qemu-img create -o preallocation=full -f qcow2 /kvm/ubuntu20.qcow 16G
+cd /kvm/
+ls -la
+ls -lah
+cat config-3.10.0-1160.59.1.el7.x86_64 | grep -i ksm
+cat /boot/config-3.10.0-1160.59.1.el7.x86_64 | grep -i ksm
+qemu-system-x86_64 -enable-kvm -name ubuntuVm -m 1G -drive format=raw,file=/kvm/ubuntu20.qcow -net dump -net nic,model=virtio -display vnc=0.0.0.0:3
+systemctl status libvirtd
+systemctl start libvirtd
+systemctl status libvirtd
+ip a s
+cd /var/lib/libvirt/
+ls -la
+cd network/
+ls -la
+cd ../filesystems/
+ls
+cd /kvm/
+vi /etc/libvirt/libvirt.conf
+wget https://releases.ubuntu.com/20.04/ubuntu-20.04.4-desktop-amd64.iso
+virsh list
+virsh list --all
+virsh undefine bionicVm
+virsh list --all
+vi /etc/libvirt/libvirt.conf
+virt-install  > --virt-type=kvm > --name bionicVm --ram 1024 --vcpus=2 > --cdrom=/kvm/bionic-server-cloudimg-amd64.img > --network=bridge=virbr0,model=virtio > --graphics vnc \
+virt-install --name ubuntu20 --ram 1024 --vcpus=2 --cdrom=/kvm/ubuntu-20.04.4-desktop-amd64.iso --network=bridge=virbr0,model=virtio --graphics vnc --disk path=/kvm/ubuntu20.qcow
+virsh list
+virsh edit ubuntu20
+virt-builder --list
+virsh destroy ubuntu20
+virsh undefine --list
+virsh undefine ubuntu20
+virsh list --all
+virt-builder ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1
+virt-builder ubuntu-20 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1
+virt-builder --os-version ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1
+virt-builder  ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1
+virsh list ubuntu-20
+virsh list ubuntu-20.04
+virsh list
+virsh-builder --list ubuntu-20.04
+virt-builder --list ubuntu-20.04
+virt-builder ubuntu-20.04
+virt-builder ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1
+virt-builder ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw --run-command touch /tmp/plik1 -v -x
+virt-builder ubuntu-20.04 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw
+virt-builder centos-8.2 --size=16G --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw
+virt-builder centos-8.2 --format qcow2 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw
+virt-builder ubuntu-20.04 -o /kvm/ubuntu20.04.qcow2 --hostname ubuntu20-server --network --timezone Europe/Warsaw
+ls -lah
+date
+rm ubuntu20.qcow
+virt-builder ubuntu-20.04 --format qcow2 -o /kvm/ubuntu20.04-2.qcow2 --hostname ubuntu20 --network --timezone Europe/Warsaw
+virt-builder centos-8.2 --format qcow2 -o /kvm/centos8.qcow2 --hostname c8-server --network --timezone Europe/Warsaw --run-command 'touch /tmp/plik1'
+virt-install  --import --name ubuntu20 --ram 2048
+virt-install  --import --name ubuntu20 --ram 2048 --vcpu 2 --os-variant ubuntu20.04 --disk path=/kvm/ubuntu20.04-2.qcow2 --network=bridge=virbr0,model=e1000 --noautoconsole
+virsh list
+virsh console ubuntu20
+virsh destroy ubuntu20
+virsh undefine ubuntu20
+virt-install  --import --name ubuntu20 --ram 2048 --vcpu 2 --os-variant ubuntu20.04 --disk path=/kvm/ubuntu20.04-2.qcow2,format=qcow2 --network=bridge=virbr0,model=virtio --noautoconsole
+virt-builder list
+virt-builder -l
+virt-builder fedora-32 -o /kvm/fedora32.qcow2 --hostname fedora32 --network --timezone Europe/Warsaw
+virt-builder fedora32 -o /kvm/ubuntu16.raw --hostname fedora32 --network --timezone Europe/Warsaw
+virt-builder fedora-32 -o /kvm/ubuntu16.raw --hostname fedora32 --network --timezone Europe/Warsaw
+virt-builder fedora-32 -o /kvm/fedora.raw --hostname fedora32 --network --timezone Europe/Warsaw
+ls -la
+rm *.qcow*
+virt-builder fedora-32 -o /kvm/fedora.raw --hostname fedora32 --network --timezone Europe/Warsaw
+virt-builder ubuntu-16.04 --format qcow2 -o /kvm/ubuntu16.qcow2 --hostname ubuntu16 --network --timezone Europe/Warsaw
+virt-install --import --name ubuntu16 --memory 2048 --vcpus 2 --disk /kvm/ubuntu16.qcow2 --network=bridge=virbr0,model=virtio
+virt-install --import --name ubuntu16 --memory 2048 --vcpus 2 --disk path=/kvm/ubuntu16.qcow2,format=qcow2 --network=bridge=virbr0,model=virtio --noautoconsole
+vi /etc/selinux/config
+reboot
+virt-manager
+virt-viewer
+df -h
+cd /kvm
+ls -la
+df -h
+cd /kvm
+ls
+ls -la
+ls -lah
+watch ls -lah
+umount /kvm
+lvreemove /dev/mapper/vg_kvm-lv_kvm
+lvremove /dev/mapper/vg_kvm-lv_kvm
+vgremove /dev/mapper/vg_kvm-
+vgremove /dev/mapper/vg_kvm
+cat /proc/patitio
+cat /proc/partitions
+pvremove /dev/sdb
+history
+systemctl status libvirtd
+systemctl enable --now libvirtd
+systemctl status libvirtd
+q
+cd /kvm
+firsh list
+virsh list
+virsh list --all
+virsh undefine ubuntu16
+virt-install --import --name ubuntu16 --memory 2048 --vcpus 2 --disk path=/kvm/ubuntu16.qcow2,format=qcow2 --network=bridge=virbr0,model=virtio --noautoconsole
+virt-builder ubuntu-16.04 --format qcow2 -o /kvm/ubuntu.qcow2 --hostname ubuntu16 --network --timezone Europe/Warsaw
+virt-install --import --name ubuntu16 --memory 2048 --vcpus 2 --disk path=/kvm/ubuntu.qcow2 --network=bridge=virbr0,model=virtio --noautoconsole
+mkdir
+mkdir /hgfs
+mkdir /mnt/hgfs
+mount -t vmhgfs .host:/ /mnt/hgfs
+mount -t fuse.vmhgfs-fuse .host:/WORKSTATION /mnt/hgfs
+cd /mnt/hgfs
+ls
+cd WORKSTATION/
+ls -la
+cd Windows10/
+ls -la
+cp -rp Windows10.vmdk /kvm/
+mount /dev/vg_kvm/lv_kvm /kvm/
+cp -rp Windows10.vmdk /kvm/
+qemu-img convert -f vmdk -O qcow2 /kvm/Windows10.vmdk windows10.qcow2
+ls -la
+rm windows10.qcow2
+qemu-img convert -f vmdk -O qcow2 /kvm/Windows10.vmdk /kvm/windows10.qcow2
+clear
+cd
+yum install snapd
+ln -s /var/lib/snapd/snap /snap
+systemctl enable --now snapd.socket
+systemctl status snapd.socket
+systemctl status snapd.service
+systemctl enable snapd.service
+systemctl start snapd.service
+snap install lxd
+lxc list
+reboot
+virt-manager
+lxc list
+lxd init
+lxc list
+lxc image list images:
+lxc image list images: | grep -i fedora
+lxc launch images:fa65206e1e4e fedora36
+lxc list
+ip as
+ip a s
+lxc launch images:fa65206e1e4e mojLinux
+lxc list
+lxc image list images: | grep -i VIRTUAL
+lxc launch images:ee57a1a2908d openSuse
+lxc list
+lxc exec fedora36
+lxc exec fedora36 bash
+find / -name lxd
+cd /var/lib/snapd/snap/lxd
+ls -la
+cd 23155/
+ls -la
+cd ..
+ls
+cd ..
+find / -name containers
+cd /var/snap/lxd/common/lxd/
+ls -la
+cd virtual-machines
+ls -la
+cd ../containers
+ls -la
+cd /var/snap/lxd/common/lxd/storage-pools/default/containers/fedora36
+ls -la
+cd ..
+cd /var/snap/lxd/common/lxd/containers
+ls
+cd fedora36/
+ls
+ls -la
+cd ..
+cd /var/snap/snapd/
+ls
+cd current/
+ls
+cd ../16010/
+ls
+cd ..
+find / -name fedora36
+cd /var/snap/lxd/common/lxd/containers/fedora36
+ls
+cd /var/snap/lxd/common/lxd/storage-pools/default/containers/fedora36
+ls
+cd ..
+cd
+cd /var/snap/lxd/common/lxd/containers
+ls -la
+lxc stop fedora36
+lxc list
+ls -la
+ls -la fedora36/
+tar czvf /root/fedora36.tar.gz /var/snap/lxd/common/lxd/containers/fedora36/
+ls -la /root/
+lxc copy --help
+df -h
+du -xh * --max-depth=1
+du -xh / --max-depth=1
+cd /kvm
+ls
+cd /usr/
+ls -la
+cd /var
+du -xh / --max-depth=1
+du -xh . --max-depth=1
+lxc list
+lxc delete -f mojLinux
+lxc delete fedora36
+lxc launch images:ee57a1a2908d openSuse
+lsmod | grep -i vhost_vsock
+modprobe vhost_vsock
+lxc launch images:ee57a1a2908d openSuse --vm
+lxc launch images:ee57a1a2908d --vm openSuse
+lsmod | grep -i vhost_vsock
+find /lib/modules/3.10.0-1160.59.1.el7.x86_64/ -name "*vhost_vsock*"
+
+history | grep -i lxc launch
+history | grep -i "lxc launch"
+lxc launch images:fa65206e1e4e fedora
+lxc list
+lxc image list images: | wc -l
+lxc exec fedora bash
+cd
+ssh 10.118.182.78
+lxc exec fedora bash
+ssh 10.118.182.78
+lxc exec fedora bash
+ssh 10.118.182.78
+lxc exec fedora bash
+ssh 10.118.182.78
+lxc profile show default
+lxc profile copy default k8s
+lxc profile edit k8s
+lxc config set fedora boot.autostart true
+lxc config get fedora
+lxc config get fedora boot.autostart
+lxc config get fedora snapshots.expiry
+ls -la
+touch plik host
+vi plik
+vi host
+lxc file push host fedora36/tmp/
+lxc list
+lxc file push host fedora/tmp/
+lxc exec fedora bash
+lxc file pull fedora/root/guestOs .
+cat guestOs
+systemctl status sshd
+systemctl stop cupsd
+systemctl stop cups
+systemctl restart cups
+systemctl status cups
+systemctl disable --now cups
+systemctl status cups
+systemctl enable cups
+systemctl start cups
+systemctl list-units
+systemctl list-units --type target
+systemctl list-units --type target --all
+systemctl get-default
+systemctl set-default
+systemctl set-default multi-user.target
+ls -la /lib/systemd/system/
+ls -la /lib/systemd/system/run*
+systemctl get-default
+ls -la /etc/systemd/system/
+crontab -l
+crontab -l student
+crontab -l -u student
+crontab -e
+which systemctl
+crontab -e
+date
+crontab -e
+systemctl status cups
+date
+crontab -l
+date
+systemctl status cups
+vi /etc/crontab
+vi /etc/cron.daily/logrotate
+vi /etc/cron.deny
+su - student
+vi /etc/cron.deny
+su - marcin
+su - jan
+wget https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg
+wget https://images.pexels.com/photos/2246476/pexels-photo-2246476.jpeg
+ping wp.pl
+mv /home/marcin/Downloads/photo.jpeg .
+ls -la
+ls -lah
+cp -rp photo.jpeg photo2.jpeg
+cp -rp photo.jpeg photo3.jpeg
+cp -rp photo.jpeg photo1.jpeg
+gzip photo1.jpeg
+ls -la photo*
+ls -lha photo*
+gzip -d photo1.jpeg.gz
+ls -lha photo*
+bzip2 photo2.jpeg
+ls -lha photo*
+ls -la photo*
+xz photo3.jpeg
+ls -la photo*
+tar --help
+ls -la
+tar czfv photo1.jpeg
+tar czfv photoTar photo1.jpeg
+ls -la
+tar czfv photoTar.tar.gz photo1.jpeg
+ls -la
+gzip photo1.jpeg
+ls -la
+
