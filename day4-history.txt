@@ -361,6 +361,8 @@ history | grep -i lxc launch
 history | grep -i "lxc launch"
 lxc launch images:fa65206e1e4e fedora
 lxc list
+
+
 lxc image list images: | wc -l
 lxc exec fedora bash
 cd
@@ -456,3 +458,65 @@ ls -la
 gzip photo1.jpeg
 ls -la
 
+yum *\sealert *\semanage *\sepolicy
+df -h
+mount /dev/sr0 /mnt/
+eject
+eject /dev/sr0 /
+eject /dev/sr0
+mount /dev/sr0 /mnt/
+cd /mnt/BaseOS/
+pwd
+vi /etc/yum.repos.d/media.repo
+yum clean all
+yum repolist
+yum *\sealert *\semanage *\sepolicy
+yum provide *\sealert *\semanage *\sepolicy
+yum provides *\sealert *\semanage *\sepolicy
+yum install -y setroubleshoot-server policycoreutils-python-utils
+semanage -l
+semanage port -l
+semanage port -l | grep http
+vi /etc/ssh/sshd_config
+semanage port -l | grep 2222
+systemctl restart sshd
+systemctl status sshd
+semanage --help
+semanage port --help
+semanage port -a -t ssh_port_t -p tcp 2222
+systemctl restart sshd
+systemctl status sshd
+systemctl status httpd
+yum install httpd
+vi /etc/httpd/conf/httpd.conf
+systemctl status httpd
+systemctl restart httpd
+systemctl status httpd
+mkdir /webserver
+cd /webserver
+cd /var/www/html/
+ls
+ls -la
+cd /webserver/
+vi index.html
+vi /etc/httpd/conf/httpd.conf
+systemctl restart httpd
+systemctl status httpd
+cd ..
+ls -laZ webserver/
+ls -laZ /var/www/html
+semanage fcontext -a -t httpd_sys_content_t "/webserver(/.*)?"
+ls -laZ webserver/
+restorecon -Rv /webserver/
+ls -laZ webserver/
+semanage fcontext -l
+getsebool -a | grep -i ftp
+setsebool -P ftpd_anon_write=1
+getsebool -a | grep -i ftp
+semanage port -d -t ssh_port_t -p tcp 2222
+semanage port -l | grep 22
+systemctl restart sshd
+systemctl status sshd
+less /var/log/messages
+cat /var/log/messages | grep -i sealert
+sealert -l 56736b90-6dbb-481c-a8f8-f7111a9b9af3
