@@ -1,0 +1,66 @@
+systemctl status sshd
+systemctl stop cupsd
+systemctl stop cups
+systemctl restart cups
+systemctl status cups
+systemctl disable --now cups
+systemctl status cups
+systemctl enable cups
+systemctl start cups
+systemctl list-units
+systemctl list-units --type target
+systemctl list-units --type target --all
+systemctl get-default
+systemctl set-default
+systemctl set-default multi-user.target
+ls -la /lib/systemd/system/
+ls -la /lib/systemd/system/run*
+systemctl get-default
+ls -la /etc/systemd/system/
+crontab -l
+crontab -l student
+crontab -l -u student
+crontab -e
+which systemctl
+crontab -e
+date
+crontab -e
+systemctl status cups
+date
+crontab -l
+date
+systemctl status cups
+vi /etc/crontab
+vi /etc/cron.daily/logrotate
+vi /etc/cron.deny
+su - student
+vi /etc/cron.deny
+su - marcin
+su - jan
+wget https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg
+wget https://images.pexels.com/photos/2246476/pexels-photo-2246476.jpeg
+ping wp.pl
+mv /home/marcin/Downloads/photo.jpeg .
+ls -la
+ls -lah
+cp -rp photo.jpeg photo2.jpeg
+cp -rp photo.jpeg photo3.jpeg
+cp -rp photo.jpeg photo1.jpeg
+gzip photo1.jpeg
+ls -la photo*
+ls -lha photo*
+gzip -d photo1.jpeg.gz
+ls -lha photo*
+bzip2 photo2.jpeg
+ls -lha photo*
+ls -la photo*
+xz photo3.jpeg
+ls -la photo*
+tar --help
+ls -la
+tar czfv photo1.jpeg
+tar czfv photoTar photo1.jpeg
+ls -la
+tar czfv photoTar.tar.gz photo1.jpeg
+ls -la
+gzip photo1.jpeg
